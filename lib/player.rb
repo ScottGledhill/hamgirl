@@ -35,4 +35,14 @@ class Player
   def draw
     @image.draw_rot(@x, @y, 1, @angle)
   end
+
+  def score
+    @score
+  end
+
+  def collect_ham(hams)
+    if hams.reject! {|ham| Gosu::distance(@x, @y, ham.x, ham.y) < 35 } then
+      @score += 1
+    end
+  end
 end
