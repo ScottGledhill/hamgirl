@@ -8,12 +8,12 @@ end
 
 class GameWindow < Gosu::Window
   def initialize
-    super 1200, 800
+    super 640, 480
     self.caption = "HAMGIRL"
-    @background_image = Gosu::Image.new("media/space.jpg", :tileable => true)
+    @background_image = Gosu::Image.new("media/space2.jpg", :tileable => true)
     @player = Player.new
     @player.warp(320, 240)
-    @ham_anim = Gosu::Image::load_tiles("media/ham.jpg", 25, 25)
+    @ham_anim = Gosu::Image::load_tiles("media/ham.png", 25, 25)
     @hams = Array.new
   end
 
