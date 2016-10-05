@@ -1,6 +1,9 @@
 class Player
+  attr_reader :score
+
   def initialize
     @image = Gosu::Image.new("media/hamgirl.jpg")
+    @beep = Gosu::Sample.new("media/beep.wav")
     @x = @y = @vel_x = @vel_y = @angle = 0.0
     @score = 0
   end
@@ -27,7 +30,6 @@ class Player
     @y += @vel_y
     @x %= 640
     @y %= 480
-
     @vel_x *= 0.95
     @vel_y *= 0.95
   end
@@ -41,8 +43,14 @@ class Player
   end
 
   def collect_ham(hams)
-    if hams.reject! {|ham| Gosu::distance(@x, @y, ham.x, ham.y) < 35 } then
-      @score += 1
+    hams.reject! do |ham|
+        if Gosu::distance(@x, @y, ham.x, ham.y) < 35 then
+          @score += 1
+          @beep.play
+          true
+        else
+          false
+        end
     end
   end
 end
